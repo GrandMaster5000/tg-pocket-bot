@@ -44,7 +44,7 @@ func (b *Bot) handleStartCommand(message *tgbotapi.Message) error {
 }
 
 func (b *Bot) handleUnknownCommand(message *tgbotapi.Message) error {
-	msg := tgbotapi.NewMessage(message.Chat.ID, "Not found command")
+	msg := tgbotapi.NewMessage(message.Chat.ID, "Я не знаю такой команды :(")
 	_, err := b.bot.Send(msg)
 	return err
 }
