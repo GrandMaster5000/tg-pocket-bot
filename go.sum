@@ -1,2 +1,6 @@
+github.com/GrandMaster5000/go-pocket-sdk v0.0.0-20220706112706-c2298b6c8094 h1:z5hFCle9laJad13/3OsvCjAc/UUYGJ3lYeau00WL89E=
+github.com/GrandMaster5000/go-pocket-sdk v0.0.0-20220706112706-c2298b6c8094/go.mod h1:1fUb30bZBnXuRKsg0A2BgKMMrpWmkF0O7G9BWG7kb0g=
 github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1 h1:wG8n/XJQ07TmjbITcGiUaOtXxdrINDz1b0J1w0SzqDc=
 github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1/go.mod h1:A2S0CWkNylc2phvKXWBBdD3K0iGnDBGbzRpISP2zBl8=
+github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
+github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
