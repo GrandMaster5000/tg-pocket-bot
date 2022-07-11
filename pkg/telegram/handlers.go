@@ -11,13 +11,10 @@ import (
 const (
 	commandStart = "start"
 
-	replyStartTemplate     = "Привет! Чтобы сохранить ссылки в своём Pocket аккаунте, для начала тебе необходимо дать мне на это доступ. Для этого переходи по ссылке:\n%s"
-	replyAlreadyAuthorized = "Ты уже авторизирован. Присылай ссылку, а я её сохраню."
-	replyLinkSuccessSave   = "Ссылка успешно сохранена."
-	replyNotValidLink      = "Это невалидная ссылка."
-	replyYouNotAuthorized  = "Ты не авторизирован. Используй команду /start."
-	replyFaildSaveLink     = "Увы, не удалось сохранить ссылку. Попробуй ещё раз позже."
-	replyUnknownError      = "Произошла неизвестная ошибка."
+	replyNotValidLink     = "Это невалидная ссылка."
+	replyYouNotAuthorized = "Ты не авторизирован. Используй команду /start."
+	replyFaildSaveLink    = "Увы, не удалось сохранить ссылку. Попробуй ещё раз позже."
+	replyUnknownError     = "Произошла неизвестная ошибка."
 )
 
 func (b *Bot) handleCommand(message *tgbotapi.Message) error {
@@ -47,7 +44,7 @@ func (b *Bot) handleMessage(message *tgbotapi.Message) error {
 		return errUnableToSave
 	}
 
-	msg := tgbotapi.NewMessage(message.Chat.ID, replyLinkSuccessSave)
+	msg := tgbotapi.NewMessage(message.Chat.ID, b.messages.SavedSuccessfully)
 	_, err = b.bot.Send(msg)
 
 	return err
@@ -59,14 +56,14 @@ func (b *Bot) handleStartCommand(message *tgbotapi.Message) error {
 		return b.initAuthorizationProccess(message)
 	}
 
-	msg := tgbotapi.NewMessage(message.Chat.ID, replyAlreadyAuthorized)
+	msg := tgbotapi.NewMessage(message.Chat.ID, b.messages.AlreadyAuthorized)
 	_, err = b.bot.Send(msg)
 
 	return err
 }
 
 func (b *Bot) handleUnknownCommand(message *tgbotapi.Message) error {
-	msg := tgbotapi.NewMessage(message.Chat.ID, "Я не знаю такой команды :(")
+	msg := tgbotapi.NewMessage(message.Chat.ID, b.messages.UnknownCommand)
 	_, err := b.bot.Send(msg)
 	return err
 }
