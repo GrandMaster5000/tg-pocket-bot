@@ -17,6 +17,7 @@ const (
 	replyNotValidLink      = "Это невалидная ссылка."
 	replyYouNotAuthorized  = "Ты не авторизирован. Используй команду /start."
 	replyFaildSaveLink     = "Увы, не удалось сохранить ссылку. Попробуй ещё раз позже."
+	replyUnknownError      = "Произошла неизвестная ошибка."
 )
 
 func (b *Bot) handleCommand(message *tgbotapi.Message) error {
@@ -29,31 +30,24 @@ func (b *Bot) handleCommand(message *tgbotapi.Message) error {
 }
 
 func (b *Bot) handleMessage(message *tgbotapi.Message) error {
-	msg := tgbotapi.NewMessage(message.Chat.ID, replyLinkSuccessSave)
-
 	_, err := url.ParseRequestURI(message.Text)
 	if err != nil {
-		msg.Text = replyNotValidLink
-		_, err = b.bot.Send(msg)
-		return err
+		return errInvalidURL
 	}
 
 	accessToken, err := b.getAccessToken(message.Chat.ID)
 	if err != nil {
-		msg.Text = replyYouNotAuthorized
-		_, err = b.bot.Send(msg)
-		return err
+		return errUnauthorized
 	}
 
 	if err = b.pocketClient.Add(context.Background(), pocket.AddInput{
 		AccessToken: accessToken,
 		URL:         message.Text,
 	}); err != nil {
-		msg.Text = replyFaildSaveLink
-		_, err = b.bot.Send(msg)
-		return err
+		return errUnableToSave
 	}
 
+	msg := tgbotapi.NewMessage(message.Chat.ID, replyLinkSuccessSave)
 	_, err = b.bot.Send(msg)
 
 	return err

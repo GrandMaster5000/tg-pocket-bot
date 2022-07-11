@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/GrandMaster5000/go-pocket-sdk"
+	"github.com/GrandMaster5000/tg-bot-pocket/pkg/config"
 	"github.com/GrandMaster5000/tg-bot-pocket/pkg/repository"
 	"github.com/GrandMaster5000/tg-bot-pocket/pkg/repository/boltdb"
 	"github.com/GrandMaster5000/tg-bot-pocket/pkg/server"
@@ -13,6 +14,13 @@ import (
 )
 
 func main() {
+	cfg, err := config.Init()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println(cfg)
+
 	bot, err := tgbotapi.NewBotAPI("5398722889:AAG_4JX-CtNRuy6zmRnZhADHZ1FYwMJRW1g")
 	if err != nil {
 		log.Fatal(err)
