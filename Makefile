@@ -6,3 +6,9 @@ build:
 
 run: build 
 	./.bin/bot
+
+build-image:
+	docker build -t telegram-bot-pocker:v0.1 .
+
+start-container:
+	docker run --name telegram-bot -p 80:80 --env-file .env telegram-bot-pocker:v0.1
